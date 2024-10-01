@@ -1,0 +1,27 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background-color: #cd9696;
+}
+#result {
+  border: 1px solid #ccc;
+  padding: 10px;
+  background-color: #fff;
+  width: 350px;
+  margin-top: 20px;
+  display: none;
+  margin: auto;
+}
+.hi {
+  margin: auto;
+  border: 1px solid #ccc;
+  margin-top: 20px;
+  padding: 10px;
+  text-align: center;
+  width: 350px;
+  margin-bottom: 80px;
+  background-color: aliceblue;
+}
+form {
+  margin-bottom: 20px;
+}
