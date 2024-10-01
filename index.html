@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CU Registration Program</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #cd9696;
+        }
+        #result {
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #fff;
+            width: 350px;
+            margin-top: 20px;
+            display: none;
+            margin: auto;
+        }
+        .hi{
+            margin: auto;
+    border: 1px solid #ccc;
+    margin-top: 20px;
+    padding: 10px;
+    text-align: center;
+    width: 350px;
+    margin-bottom: 80px;
+    background-color: aliceblue;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>CU Registration Program</h2>
+    <div class="hi">
+
+    <form id="registrationForm">
+        <label for="studentType">Student Type:</label>
+        <select id="studentType" required>
+            <option value="" disabled selected>Select your student type</option>
+            <option value="bachelor">Bachelor</option>
+            <option value="master">Master</option>
+        </select>
+        <br><br>
+
+        <label for="residency">Residency:</label>
+        <select id="residency" required>
+            <option value="" disabled selected>Select your residency</option>
+            <option value="in-state">In-state</option>
+            <option value="out-state">Out-state</option>
+        </select>
+        <br><br>
+
+        <label for="creditsTaking">Number of Credits:</label>
+        <input type="number" id="creditsTaking" min="1" required>
+        <br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+    <div id="result"></div>
+
+    <script>
+        const registrationFee = 200;
+        const tuitionRates = {
+            bachelor: { 'in-state': 350, 'out-state': 700 },
+            master: { 'in-state': 450, 'out-state': 900 }
+        };
+
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const studentType = document.getElementById('studentType').value;
+            const residency = document.getElementById('residency').value;
+            const creditsTaking = parseInt(document.getElementById('creditsTaking').value);
+
+            if (!studentType || !residency || isNaN(creditsTaking) || creditsTaking <= 0) {
+                alert("Please fill out all fields correctly.");
+                return;
+            }
+
+            let tuitionRate = tuitionRates[studentType][residency];
+
+            
+            let tuition = creditsTaking * tuitionRate;
+            let total = tuition + registrationFee;
+
+            document.getElementById('result').style.display = 'block';
+            document.getElementById('result').innerHTML = `
+                <p>Student Type: ${studentType.charAt(0).toUpperCase() + studentType.slice(1)}</p>
+                <p>Residency: ${residency.charAt(0).toUpperCase() + residency.slice(1)}</p>
+                <p>Credits Taking: ${creditsTaking}</p>
+                <p>Registration Fee: $${registrationFee}</p>
+                <p>Tuition Rate: $${tuitionRate} (per credit)</p>
+                <p>Tuition: $${tuition}</p>
+                <p>Total: $${total}</p>
+            `;
+        });
+    </script>
+
+</body>
+</html>
